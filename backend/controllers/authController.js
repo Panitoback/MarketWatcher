@@ -1,6 +1,8 @@
-const User = require('../models/User'); // Import the User model
-const bcrypt = require('bcryptjs'); // For password hashing
-const jwt = require('jsonwebtoken'); // For creating JWTs
+console.log('Attempting to load User model from:', __dirname + '/../models/User.js'); // Add this line
+const User = require('../models/User.js'); // Keep this line as it was last modified (with .js)
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+// ... rest of your code
 
 // @desc    Register new user
 // @route   POST /api/auth/register
