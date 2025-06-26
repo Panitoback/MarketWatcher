@@ -1,5 +1,3 @@
-// En backend/utils/scraper.js
-
 const puppeteer = require('puppeteer');
 
 async function scrapeProduct(url) {
@@ -24,8 +22,7 @@ async function scrapeProduct(url) {
 
         const priceText = await page.evaluate(selector => {
             const element = document.querySelector(selector);
-            // Using innerText || textContent for robustness, as a.offscreen might sometimes have empty innerText
-            return element ? (element.innerText || element.textContent).trim() : null; // **THIS LINE IS CRUCIAL**
+            return element ? (element.innerText || element.textContent).trim() : null; 
         }, priceSelector);
 
         // Clean and parse the price (remove currency symbols, commas, convert to number)

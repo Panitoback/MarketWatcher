@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const productSchema = new mongoose.Schema({ // Corrected: removed extra 'new'
+const productSchema = new mongoose.Schema({ 
     userId: {
         type: mongoose.Schema.Types.ObjectId, // Reference to the User who is monitoring this product
         ref: 'User', // Refers to the 'User' model
@@ -41,13 +41,7 @@ const productSchema = new mongoose.Schema({ // Corrected: removed extra 'new'
         enum: ['active', 'paused', 'error'],
         default: 'active'
     },
-    // Optional: Can add a priceHistory array later for charting
-    // priceHistory: [
-    //     {
-    //         price: { type: Number, required: true },
-    //         date: { type: Date, default: Date.now }
-    //     }
-    // ]
+
 }, {
     timestamps: true // Adds `createdAt` and `updatedAt` fields automatically
 });

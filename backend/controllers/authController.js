@@ -1,8 +1,8 @@
-console.log('Attempting to load User model from:', __dirname + '/../models/User.js'); // Add this line
-const User = require('../models/User.js'); // Keep this line as it was last modified (with .js)
+console.log('Attempting to load User model from:', __dirname + '/../models/User.js'); 
+const User = require('../models/User.js'); 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-// ... rest of your code
+
 
 // @desc    Register new user
 // @route   POST /api/auth/register
@@ -44,7 +44,7 @@ exports.registerUser = async (req, res) => {
 
         jwt.sign(
             payload,
-            process.env.JWT_SECRET, // Your secret key from .env
+            process.env.JWT_SECRET, //  secret key from .env
             { expiresIn: '1h' }, // Token expires in 1 hour
             (err, token) => {
                 if (err) throw err;

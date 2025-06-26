@@ -53,9 +53,7 @@ exports.addProduct = async (req, res) => {
     }
 };
 
-// @desc    Get all products monitored by the authenticated user
-// @route   GET /api/products
-// @access  Private
+
 exports.getProducts = async (req, res) => {
     try {
         const products = await Product.find({ userId: req.user.id }).sort({ createdAt: -1 });
@@ -66,9 +64,7 @@ exports.getProducts = async (req, res) => {
     }
 };
 
-// @desc    Update a product (e.g., target price, status)
-// @route   PUT /api/products/:id
-// @access  Private
+
 exports.updateProduct = async (req, res) => {
     const { id } = req.params; // Product ID from URL
     const userId = req.user.id; // User ID from authenticated request
@@ -98,9 +94,7 @@ exports.updateProduct = async (req, res) => {
     }
 };
 
-// @desc    Delete a product
-// @route   DELETE /api/products/:id
-// @access  Private
+
 exports.deleteProduct = async (req, res) => {
     const { id } = req.params; // Product ID from URL
     const userId = req.user.id; // User ID from authenticated request
