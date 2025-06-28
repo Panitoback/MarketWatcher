@@ -1,9 +1,5 @@
 // Always use puppeteer-core
 const puppeteer = require('puppeteer-core');
-// Only require chrome-aws-lambda in production
-const chromium = process.env.NODE_ENV === 'production'
-    ? require('chrome-aws-lambda')
-    : null;
 
 /**
  * Scrapes a product's name and price from a given URL.
@@ -14,17 +10,16 @@ async function scrapeProduct(url) {
     let browser;
     try {
         const launchOptions = process.env.NODE_ENV === 'production'
-            ? { // Options for Render deployment (uses chrome-aws-lambda)
-                args: [...chromium.args, '--hide-scrollbars', '--disable-web-security'],
-                defaultViewport: chromium.defaultViewport,
-                executablePath: await chromium.executablePath,
-                headless: chromium.headless,
+            ? { // Options for Render deployment (TRYING direct executablePath)
+                args: ['--no-sandbox', '--disable-setuid-sandbox'], // Essential arguments
+                executablePath: '/usr/bin/google-chrome', // Common path for Chrome on Linux systems (let's try this first)
+                headless: true, // Render's environment is headless
                 ignoreHTTPSErrors: true,
             }
             : { // Options for local development (relies on local system Chrome/Chromium installation)
-                headless: true, // Use headless mode for local testing
-                executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', // OPTIONAL: Only if puppeteer-core can't find Chrome automatically
-                args: ['--no-sandbox', '--disable-setuid-sandbox'] // Good practice even locally
+                headless: true,
+                executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', // YOUR LOCAL WINDOWS PATH
+                args: ['--no-sandbox', '--disable-setuid-sandbox']
             };
 
         browser = await puppeteer.launch(launchOptions);
